@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Composite Pattern | Blog by Leven</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="layout: posttitle: Improving lexing performance in PHP excerpt: Some thoughts on improving lexing performance in PHP by compiling the individual token regexes into one big super-regex.Lexing isn’t so">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Composite Pattern">
+<meta property="og:url" content="https://leven87.github.io/2018/11/26/Composite-Pattern/index.html">
+<meta property="og:site_name" content="Blog by Leven">
+<meta property="og:description" content="layout: posttitle: Improving lexing performance in PHP excerpt: Some thoughts on improving lexing performance in PHP by compiling the individual token regexes into one big super-regex.Lexing isn’t so">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-11-26T14:55:22.107Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Composite Pattern">
+<meta name="twitter:description" content="layout: posttitle: Improving lexing performance in PHP excerpt: Some thoughts on improving lexing performance in PHP by compiling the individual token regexes into one big super-regex.Lexing isn’t so">
+  
+    <link rel="alternate" href="/atom.xml" title="Blog by Leven" type="application/atom+xml">
+  
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/css/styles.css">
+  
+
+</head>
+</html>
+<body>
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="main-menu-navbar">
+      <ul class="nav navbar-nav">
+        
+          <li><a class="" href="/index.html">Home</a></li>
+        
+          <li><a class="" href="/archives/">Archives</a></li>
+        
+          <li><a class="" href="/about/">About</a></li>
+        
+          <li><a class="" href="https://github.com/leven87">Github</a></li>
+        
+          <li><a class="" href="https://www.linkedin.com/in/levendeveloper/">LinkedIn</a></li>
+        
+      </ul>
+
+      <!--
+      <ul class="nav navbar-nav navbar-right">
+        
+          <li><a href="/atom.xml" title="RSS Feed"><i class="fa fa-rss"></i></a></li>
+        
+      </ul>
+      -->
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+  <div class="container">
+    <div class="blog-header">
+  <h1 class="blog-title">Blog by Leven</h1>
+  
+</div>
+
+    <div class="row">
+        <div class="col-sm-8 blog-main">
+          <article id="post-Composite-Pattern" class="article article-type-post" itemscope="" itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <h1 class="article-title" itemprop="name">
+      Composite Pattern
+    </h1>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/2018/11/26/Composite-Pattern/" class="article-date"><time datetime="2018-11-26T14:11:47.000Z" itemprop="datePublished">2018-11-26</time></a>
+</div>
+
+    <div class="article-author">Li</div>
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>layout: post<br>title: Improving lexing performance in PHP</p>
+<h2 id="excerpt-Some-thoughts-on-improving-lexing-performance-in-PHP-by-compiling-the-individual-token-regexes-into-one-big-super-regex"><a href="#excerpt-Some-thoughts-on-improving-lexing-performance-in-PHP-by-compiling-the-individual-token-regexes-into-one-big-super-regex" class="headerlink" title="excerpt: Some thoughts on improving lexing performance in PHP by compiling the individual token regexes into one big super-regex."></a>excerpt: Some thoughts on improving lexing performance in PHP by compiling the individual token regexes into one big super-regex.</h2><p><a href="https://en.wikipedia.org/wiki/Lexical_analysis" target="_blank" rel="noopener">Lexing</a> isn’t something you would normally do in PHP, simply because other languages like C can<br>easily outperform PHP by several orders of magnitude. Still it sometimes is desirable to write<br>lexers in PHP, e.g. for tokenizing templates, doccomments and other <a href="https://en.wikipedia.org/wiki/Domain-specific_language" target="_blank" rel="noopener">DSLs</a>. So I want to share<br>some thoughts on how to write fast lexers in PHP.</p>
+<h2 id="Lexing-CSV-files"><a href="#Lexing-CSV-files" class="headerlink" title="Lexing CSV files"></a>Lexing CSV files</h2><p>PHP already provides functions for parsing CSV <a href="https://php.net/fgetcsv" target="_blank" rel="noopener">files</a> and <a href="https://php.net/str_getcsv" target="_blank" rel="noopener">strings</a>. I will use CSV lexing as<br>an example anyways, simply because it’s so simple. Here an example of a CSV line (as PHP implements<br>it):</p>
+<pre><code>Field,Another Field,&quot;comma -&gt; , &lt;- comma&quot;,&quot;quote -&gt; \&quot; &lt;- quote&quot;
+</code></pre><p>If we define the tokens in terms of regular expressions, they would look roughly like this:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$tokenMap = array(</span><br><span class="line">    &apos;~[^&quot;,\r\n]+~A&apos;                     =&gt; T_PLAIN_FIELD,</span><br><span class="line">    &apos;~&quot;[^&quot;\\\\]*(?:\\\\.[^&quot;\\\\]*)*&quot;~A&apos; =&gt; T_QUOTED_FIELD,</span><br><span class="line">    &apos;~,~A&apos;                              =&gt; T_FIELD_SEPARATOR,</span><br><span class="line">    &apos;~\r\n?|\n~A&apos;                       =&gt; T_LINE_SEPARATOR,</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h2 id="Looping-through-the-regexes"><a href="#Looping-through-the-regexes" class="headerlink" title="Looping through the regexes"></a>Looping through the regexes</h2><p>The most obvious approach to lexing in PHP is to simply loop through the regexes and match them<br>against the current position, until there are no characters left:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">function lex($string, array $tokenMap) &#123;</span><br><span class="line">    $tokens = array();</span><br><span class="line"></span><br><span class="line">    $offset = 0; // current offset in string</span><br><span class="line">    while (isset($string[$offset])) &#123; // loop as long as we aren&apos;t at the end of the string</span><br><span class="line">        foreach ($tokenMap as $regex =&gt; $token) &#123;</span><br><span class="line">            if (preg_match($regex, $string, $matches, null, $offset)) &#123;</span><br><span class="line">                $tokens[] = array(</span><br><span class="line">                    $token,      // token ID      (e.g. T_FIELD_SEPARATOR)</span><br><span class="line">                    $matches[0], // token content (e.g. ,)</span><br><span class="line">                );</span><br><span class="line">                $offset += strlen($matches[0]);</span><br><span class="line">                continue 2; // continue the outer while loop</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        throw new LexingException(sprintf(&apos;Unexpected character &quot;%s&quot;&apos;, $string[$offset]));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return $tokens;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The drawback of this code is fairly obvious: On every new offset one needs to iterate through all<br>regexes and match them one at the time. This maybe isn’t such a problem in this case as we only have<br>four regexes, but when lexing some real language one usually deals with hundreds of them.</p>
+<h2 id="Compiling-into-a-single-regex"><a href="#Compiling-into-a-single-regex" class="headerlink" title="Compiling into a single regex"></a>Compiling into a single regex</h2><p>The solution is to compile all regexes into a single big one. Our above regex would be converted to:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$regex = &apos;~</span><br><span class="line">    ([^&quot;,\r\n]+)</span><br><span class="line">  | (&quot;[^&quot;\\\\]*(?:\\\\.[^&quot;\\\\]*)*&quot;)</span><br><span class="line">  | (,)</span><br><span class="line">  | (\r\n?|\n)</span><br><span class="line">~xA&apos;;</span><br></pre></td></tr></table></figure>
+<p>But how can we use this? How can we know which of the four subregexes matched the string? Simple: As<br>all the subregexes are enclosed in parenthesis they are capturing groups. So our <code>$matches</code> array<br>will contain the matched string at position <code>[0]</code> and at the position of the matched subregex. All<br>other groups will be empty.</p>
+<p>An example: If the regex matched the <code>,</code> subregex, we would get this <code>$matches</code> array:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">array(</span><br><span class="line">    0 =&gt; &apos;,&apos;,</span><br><span class="line">    1 =&gt; &apos;&apos;,</span><br><span class="line">    2 =&gt; &apos;&apos;,</span><br><span class="line">    3 =&gt; &apos;,&apos;,</span><br><span class="line">    4 =&gt; &apos;&apos;,</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>From this we know that the 3rd subregex matched, as it is the one which has a value.</p>
+<p>The resulting code for an abstract lexer class would be:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">class Lexer &#123;</span><br><span class="line">    protected $regex;</span><br><span class="line">    protected $offsetToToken;</span><br><span class="line"></span><br><span class="line">    public function __construct(array $tokenMap) &#123;</span><br><span class="line">        $this-&gt;regex = &apos;((&apos; . implode(&apos;)|(&apos;, array_keys($tokenMap)) . &apos;))A&apos;;</span><br><span class="line">        $this-&gt;offsetToToken = array_values($tokenMap);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public function lex($string) &#123;</span><br><span class="line">        $tokens = array();</span><br><span class="line"></span><br><span class="line">        $offset = 0;</span><br><span class="line">        while (isset($string[$offset])) &#123;</span><br><span class="line">            if (!preg_match($this-&gt;regex, $string, $matches, null, $offset)) &#123;</span><br><span class="line">                throw new LexingException(sprintf(&apos;Unexpected character &quot;%s&quot;&apos;, $string[$offset]));</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            // find the first non-empty element (but skipping $matches[0]) using a quick for loop</span><br><span class="line">            for ($i = 1; &apos;&apos; === $matches[$i]; ++$i);</span><br><span class="line"></span><br><span class="line">            $tokens[] = array($matches[0], $this-&gt;offsetToToken[$i - 1]);</span><br><span class="line"></span><br><span class="line">            $offset += strlen($matches[0]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return $tokens;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="How-much-does-this-really-change"><a href="#How-much-does-this-really-change" class="headerlink" title="How much does this really change?"></a>How much does this really change?</h2><p>I am seeing approximately 30% performance improvement for the average case (<a href="http://codepad.viper-7.com/B5Arj5" target="_blank" rel="noopener">online demo</a>). But this value varies with different regexes and input. If the number of regexes increases the<br>performance improvement is bigger. Additionally in the compiled-regex variant the order of the<br>regexed has less influence on the execution time (<a href="http://codepad.viper-7.com/hng1i0" target="_blank" rel="noopener">online demo</a>). I.e. it is not that important<br>to put the more probable regexes first and the less probable ones last. (But it still is important,<br>only less important!)</p>
+
+      
+    </div>
+
+    
+      
+
+    
+
+    <footer class="article-footer">
+      <a data-url="https://leven87.github.io/2018/11/26/Composite-Pattern/" data-id="cjoz4v1rc0000s4o8zhne44ak" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
+      
+
+    </footer>
+  </div>
+  
+    
+<ul id="article-nav" class="nav nav-pills nav-justified">
+  
+  <li role="presentation">
+    <a href="/2018/11/17/“welcome”/" id="article-nav-older" class="article-nav-link-wrap">
+      <i class="fa fa-chevron-left pull-left"></i>
+      <span class="article-nav-link-title">welcome</span>
+    </a>
+  </li>
+  
+  
+  <li role="presentation">
+    <a href="/2018/11/27/test/" id="article-nav-newer" class="article-nav-link-wrap">
+      <span class="article-nav-link-title">test</span>
+      <i class="fa fa-chevron-right pull-right"></i>
+    </a>
+  </li>
+  
+</ul>
+
+
+  
+</article>
+
+
+
+
+        </div>
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+          
+  <div class="sidebar-module sidebar-module-inset">
+  <h4>About</h4>
+  <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+
+</div>
+
+
+  
+
+
+  
+
+
+  
+
+  
+
+  
+  <div class="sidebar-module">
+    <h4>Recents</h4>
+    <ul class="sidebar-module-list">
+      
+        <li>
+          <a href="/2018/11/27/test/">test</a>
+        </li>
+      
+        <li>
+          <a href="/2018/11/26/Composite-Pattern/">Composite Pattern</a>
+        </li>
+      
+        <li>
+          <a href="/2018/11/17/“welcome”/">welcome</a>
+        </li>
+      
+        <li>
+          <a href="/2018/11/17/hello-world/">Hello World</a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+
+        </div>
+    </div>
+  </div>
+  <footer class="blog-footer">
+  <div class="container">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Li<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+  
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" integrity="sha384-8gBf6Y4YYq7Jx97PIqmTwLPin4hxIzQw5aDmUg/DDhul9fFpbbLcLh3nTIIDJKhx" crossorigin="anonymous"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+</body>
+</html>
