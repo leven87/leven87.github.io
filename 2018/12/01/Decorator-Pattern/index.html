@@ -4,18 +4,21 @@
   <meta name="google-site-verification" content="XKEyTWuV53yQzO9ayZJeVpvRbvOYJG1FOARfYtzxnK8">
   <meta charset="utf-8">
   
-  <title>Blog by Leven</title>
+  <title>Decorator-Pattern | Blog by Leven</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to my blog.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Blog by Leven">
-<meta property="og:url" content="https://leven87.github.io/index.html">
+  <meta name="description" content="What is decorator pattern The usage of decorator pattern Intent How to solve Key code Advantage Disadvantage   Scene and example Reference document   What is decorator pattern在软件工程中，装饰器模式允许向一个现有的对象添">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Decorator-Pattern">
+<meta property="og:url" content="https://leven87.github.io/2018/12/01/Decorator-Pattern/index.html">
 <meta property="og:site_name" content="Blog by Leven">
-<meta property="og:description" content="Welcome to my blog.">
+<meta property="og:description" content="What is decorator pattern The usage of decorator pattern Intent How to solve Key code Advantage Disadvantage   Scene and example Reference document   What is decorator pattern在软件工程中，装饰器模式允许向一个现有的对象添">
 <meta property="og:locale" content="English">
+<meta property="og:image" content="https://leven87.github.io/uploads/pic/20181203204429.png">
+<meta property="og:updated_time" content="2018-12-03T12:53:09.281Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Blog by Leven">
-<meta name="twitter:description" content="Welcome to my blog.">
+<meta name="twitter:title" content="Decorator-Pattern">
+<meta name="twitter:description" content="What is decorator pattern The usage of decorator pattern Intent How to solve Key code Advantage Disadvantage   Scene and example Reference document   What is decorator pattern在软件工程中，装饰器模式允许向一个现有的对象添">
+<meta name="twitter:image" content="https://leven87.github.io/uploads/pic/20181203204429.png">
   
     <link rel="alternate" href="/atom.xml" title="Blog by Leven" type="application/atom+xml">
   
@@ -51,7 +54,7 @@
     <div class="collapse navbar-collapse" id="main-menu-navbar">
       <ul class="nav navbar-nav">
         
-          <li><a class="active" href="/index.html">Home</a></li>
+          <li><a class="" href="/index.html">Home</a></li>
         
           <li><a class="" href="/archives/">Archives</a></li>
         
@@ -82,15 +85,13 @@
 
     <div class="row">
         <div class="col-sm-8 blog-main">
-          
-  
-    <article id="post-Decorator-Pattern" class="article article-type-post" itemscope="" itemprop="blogPost">
+          <article id="post-Decorator-Pattern" class="article article-type-post" itemscope="" itemprop="blogPost">
 
   <header class="article-header">
     
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/01/Decorator-Pattern/">Decorator-Pattern</a>
+    <h1 class="article-title" itemprop="name">
+      Decorator-Pattern
     </h1>
   
 
@@ -165,94 +166,20 @@
     </footer>
   </div>
   
-</article>
-
-
-<div id="disqus_thread"></div>
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://blog-by-leven.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  
-    <article id="post-Composite-Pattern" class="article article-type-post" itemscope="" itemprop="blogPost">
-
-  <header class="article-header">
     
+<ul id="article-nav" class="nav nav-pills nav-justified">
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/27/Composite-Pattern/">Composite-Pattern</a>
-    </h1>
+  <li role="presentation">
+    <a href="/2018/11/27/Composite-Pattern/" id="article-nav-older" class="article-nav-link-wrap">
+      <i class="fa fa-chevron-left pull-left"></i>
+      <span class="article-nav-link-title">Composite-Pattern</span>
+    </a>
+  </li>
   
-
-
-  </header>
-
-  <div class="article-meta">
-    <div class="article-datetime">
-  <a href="/2018/11/27/Composite-Pattern/" class="article-date"><time datetime="2018-11-27T06:58:00.000Z" itemprop="datePublished">2018-11-27</time></a>
-</div>
-
-    <div class="article-author">Li</div>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Design-Patterns/">Design Patterns</a>
-  </div>
-
-
-  </div>
-  <div class="article-inner">
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!-- TOC -->
-<ul>
-<li><a href="#what-is-composite-pattern">what is composite pattern</a></li>
-<li><a href="#the-usage-of-composite-pattern">the usage of composite pattern</a></li>
-<li><a href="#scene-and-example">scene and example</a></li>
-<li><a href="#reference-document">Reference document</a></li>
+  
 </ul>
-<!-- /TOC -->
-<h3 id="what-is-composite-pattern"><a href="#what-is-composite-pattern" class="headerlink" title="what is composite pattern"></a>what is composite pattern</h3><p>In software engineering, the composite pattern is a partitioning design pattern. The composite pattern describes a group of objects that is treated the same way as a single instance of the same type of object. The intent of a composite is to “compose” objects into tree structures to represent part-whole hierarchies. Implementing the composite pattern lets clients treat individual objects and compositions uniformly.</p>
-<h3 id="the-usage-of-composite-pattern"><a href="#the-usage-of-composite-pattern" class="headerlink" title="the usage of composite pattern"></a>the usage of composite pattern</h3><p>Composite should be used when clients ignore the difference between compositions of objects and individual objects. If programmers find that they are using multiple objects in the same way, and often have nearly identical code to handle each of them, then composite is a good choice; it is less complex in this situation to treat primitives and composites as homogeneous.</p>
-<p>It can be used in partial/whole scene, such as tree menus, files/folder, tree-structured hierarchies.</p>
-<p>the UML class object diagram for the Composite design pattern is shown below,</p>
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/6/65/W3sDesign_Composite_Design_Pattern_UML.jpg" alt="the UML class object diagram for the Composite design pattern"></p>
-<h3 id="scene-and-example"><a href="#scene-and-example" class="headerlink" title="scene and example"></a>scene and example</h3><p>Here is an example written in python, and it use child graphics  to composite a multiple graphic through uniform Component（Graphic）.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Composite pattern example.</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">from</span> abc <span class="keyword">import</span> ABC, abstractmethod</span><br><span class="line"></span><br><span class="line">NOT_IMPLEMENTED = <span class="string">"You should implement this."</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Component</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Graphic</span><span class="params">(ABC)</span>:</span></span><br><span class="line"><span class="meta">    @abstractmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">print</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">raise</span> NotImplementedError(NOT_IMPLEMENTED)</span><br><span class="line"></span><br><span class="line"><span class="comment"># "Composite" </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CompositeGraphic</span><span class="params">(Graphic)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.graphics = []</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">print</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">for</span> graphic <span class="keyword">in</span> self.graphics:</span><br><span class="line">            graphic.print()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(self, graphic)</span>:</span></span><br><span class="line">        self.graphics.append(graphic)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">remove</span><span class="params">(self, graphic)</span>:</span></span><br><span class="line">        self.graphics.remove(graphic)</span><br><span class="line"></span><br><span class="line"><span class="comment"># "Leaf" </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Ellipse</span><span class="params">(Graphic)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">print</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">"Ellipse:"</span>, self.name)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># "Client"</span></span><br><span class="line">ellipse1 = Ellipse(<span class="string">"1"</span>)</span><br><span class="line">ellipse2 = Ellipse(<span class="string">"2"</span>)</span><br><span class="line">ellipse3 = Ellipse(<span class="string">"3"</span>)</span><br><span class="line">ellipse4 = Ellipse(<span class="string">"4"</span>)</span><br><span class="line"></span><br><span class="line">graphic = CompositeGraphic()</span><br><span class="line">graphic1 = CompositeGraphic()</span><br><span class="line">graphic2 = CompositeGraphic()</span><br><span class="line"></span><br><span class="line">graphic1.add(ellipse1)</span><br><span class="line">graphic1.add(ellipse2)</span><br><span class="line">graphic1.add(ellipse3)</span><br><span class="line">graphic1.remove(ellipse2)</span><br><span class="line"></span><br><span class="line">graphic2.add(ellipse4)</span><br><span class="line"></span><br><span class="line">graphic.add(graphic1)</span><br><span class="line">graphic.add(graphic2)</span><br><span class="line"></span><br><span class="line">graphic.print()</span><br></pre></td></tr></table></figure>
-<h3 id="reference-document"><a href="#reference-document" class="headerlink" title="Reference document"></a>Reference document</h3><p><a href="https://en.wikipedia.org/wiki/Composite_pattern" target="_blank" rel="noopener">wiki - Composite_pattern</a></p>
 
-      
-    </div>
 
-    
-      
-
-    
-
-    <footer class="article-footer">
-      <a data-url="https://leven87.github.io/2018/11/27/Composite-Pattern/" data-id="cjp8bfz7b0001f4o8k8qpzblg" class="article-share-link">
-        <i class="fa fa-share"></i> Share
-      </a>
-      
-      
-
-    </footer>
-  </div>
   
 </article>
 
@@ -277,235 +204,6 @@ s.setAttribute('data-timestamp', +new Date());
 })();
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  
-    <article id="post-test" class="article article-type-post" itemscope="" itemprop="blogPost">
-
-  <header class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/27/test/">test</a>
-    </h1>
-  
-
-
-  </header>
-
-  <div class="article-meta">
-    <div class="article-datetime">
-  <a href="/2018/11/27/test/" class="article-date"><time datetime="2018-11-27T02:34:04.000Z" itemprop="datePublished">2018-11-27</time></a>
-</div>
-
-    
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/test/">test</a>
-  </div>
-
-
-  </div>
-  <div class="article-inner">
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>fsdfsdafs</p>
-<p>Definition Term<br>:    This is the definition for the term</p>
-
-      
-    </div>
-
-    
-      
-
-    
-
-    <footer class="article-footer">
-      <a data-url="https://leven87.github.io/2018/11/27/test/" data-id="cjp8bfz7z0005f4o8qg27i5r9" class="article-share-link">
-        <i class="fa fa-share"></i> Share
-      </a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/test1/">test1</a></li></ul>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-<div id="disqus_thread"></div>
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://blog-by-leven.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  
-    <article id="post-“welcome”" class="article article-type-post" itemscope="" itemprop="blogPost">
-
-  <header class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/17/“welcome”/">welcome</a>
-    </h1>
-  
-
-
-  </header>
-
-  <div class="article-meta">
-    <div class="article-datetime">
-  <a href="/2018/11/17/“welcome”/" class="article-date"><time datetime="2018-11-17T11:57:00.000Z" itemprop="datePublished">2018-11-17</time></a>
-</div>
-
-    
-    
-
-  </div>
-  <div class="article-inner">
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>welcome to my new blog!   </p>
-
-      
-    </div>
-
-    
-      
-
-    
-
-    <footer class="article-footer">
-      <a data-url="https://leven87.github.io/2018/11/17/“welcome”/" data-id="cjp8bfz810006f4o8h085jrxo" class="article-share-link">
-        <i class="fa fa-share"></i> Share
-      </a>
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-
-<div id="disqus_thread"></div>
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://blog-by-leven.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope="" itemprop="blogPost">
-
-  <header class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/17/hello-world/">Hello World</a>
-    </h1>
-  
-
-
-  </header>
-
-  <div class="article-meta">
-    <div class="article-datetime">
-  <a href="/2018/11/17/hello-world/" class="article-date"><time datetime="2018-11-17T11:32:15.159Z" itemprop="datePublished">2018-11-17</time></a>
-</div>
-
-    
-    
-
-  </div>
-  <div class="article-inner">
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="quick-start"><a href="#quick-start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="create-a-new-post"><a href="#create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="run-server"><a href="#run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="generate-static-files"><a href="#generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="deploy-to-remote-sites"><a href="#deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-
-    
-      
-
-    
-
-    <footer class="article-footer">
-      <a data-url="https://leven87.github.io/2018/11/17/hello-world/" data-id="cjp8bfz7v0004f4o86i7e3x1d" class="article-share-link">
-        <i class="fa fa-share"></i> Share
-      </a>
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-
-<div id="disqus_thread"></div>
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://blog-by-leven.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  
-
-
-
 
         </div>
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
