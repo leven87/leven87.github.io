@@ -84,6 +84,114 @@
         <div class="col-sm-8 blog-main">
           
   
+    <article id="post-Facade-Pattern" class="article article-type-post" itemscope="" itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/04/Facade-Pattern/">Facade-Pattern</a>
+    </h1>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/2018/12/04/Facade-Pattern/" class="article-date"><time datetime="2018-12-04T04:25:08.000Z" itemprop="datePublished">2018-12-04</time></a>
+</div>
+
+    <div class="article-author">Li</div>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Design-Patterns/">Design Patterns</a>
+  </div>
+
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- TOC -->
+<ul>
+<li><a href="#what-is-facade-pattern">What is Facade pattern</a></li>
+<li><a href="#the-usage-of-facade-pattern">The usage of Facade pattern</a></li>
+<li><a href="#scene-and-example">Scene and example</a></li>
+<li><a href="#facade-in-laravel">Facade in Laravel</a></li>
+<li><a href="#reference-document">Reference document</a></li>
+</ul>
+<!-- /TOC -->
+<h3 id="what-is-facade-pattern"><a href="#what-is-facade-pattern" class="headerlink" title="What is Facade pattern"></a>What is Facade pattern</h3><p>在软件工程中，隐藏系统的复杂性，并向客户端提供了可以访问系统的接口。这种类型的设计模式属于结构型模式<br>In the software engineering, Facade pattern can hide the complexities of the larger system and provide a simple interface to the client.  This kind of design pattern is included in structural patterns.</p>
+<h3 id="the-usage-of-facade-pattern"><a href="#the-usage-of-facade-pattern" class="headerlink" title="The usage of Facade pattern"></a>The usage of Facade pattern</h3><ol>
+<li><p>advantage: easy for client; improve the safety</p>
+</li>
+<li><p>disadvantage: not conform <a href="https://en.wikipedia.org/wiki/Open%E2%80%93closed_principle" target="_blank" rel="noopener">open-close principle</a>; hard to modify.</p>
+</li>
+</ol>
+<h3 id="scene-and-example"><a href="#scene-and-example" class="headerlink" title="Scene and example"></a>Scene and example</h3><p>门面模式的应用非常广泛。当需要屏蔽掉内部的细节，只给出简单接口的时候，你就会想到门面模式。它对客户非常友好。下面一个例子，是模拟计算机处理程序的过程。</p>
+<p>Facade pattern is widely used in many applications. When you need to hide the internal details and give only simple interfaces, you will consider facade pattern. It is very friendly to client. The simple example shown below is  simulating  how computers deal with programs.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Facade pattern example.</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Complex computer parts</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CPU</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Simple CPU representation.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">freeze</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">"Freezing processor."</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">jump</span><span class="params">(self, position)</span>:</span></span><br><span class="line">        print(<span class="string">"Jumping to:"</span>, position)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">execute</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">"Executing."</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Memory</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Simple memory representation.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">load</span><span class="params">(self, position, data)</span>:</span></span><br><span class="line">        print(<span class="string">"Loading from &#123;0&#125; data: '&#123;1&#125;'."</span>.format(position, data))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SolidStateDrive</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Simple solid state drive representation.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">read</span><span class="params">(self, lba, size)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Some data from sector &#123;0&#125; with size &#123;1&#125;"</span>.format(lba, size)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ComputerFacade</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Represents a facade for various computer parts.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.cpu = CPU()</span><br><span class="line">        self.memory = Memory()</span><br><span class="line">        self.ssd = SolidStateDrive()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">start</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.cpu.freeze()</span><br><span class="line">        self.memory.load(<span class="string">"0x00"</span>, self.ssd.read(<span class="string">"100"</span>, <span class="string">"1024"</span>))</span><br><span class="line">        self.cpu.jump(<span class="string">"0x00"</span>)</span><br><span class="line">        self.cpu.execute()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">computer_facade = ComputerFacade()</span><br><span class="line">computer_facade.start()</span><br></pre></td></tr></table></figure>
+<h3 id="facade-in-laravel"><a href="#facade-in-laravel" class="headerlink" title="Facade in Laravel"></a>Facade in Laravel</h3><p>Laravel is a widely used  php framework.  In the framework, the facade pattern is a very important feature. This article (<a href="https://medium.com/a-young-devoloper/understanding-laravel-facades-4802025899e6" target="_blank" rel="noopener">Understanding Laravel Facades</a>) introduces how facade is used in Laravel. And if you want to create a new facade , you should follow for steps below,</p>
+<ol>
+<li><p>Create your own service <code>YourService.php</code> , it may look like this:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Services</span>\<span class="title">Api</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">YourService</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"function __constructed"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span>  <span class="title">doSomething</span><span class="params">()</span></span>&#123;</span><br><span class="line">         <span class="keyword">echo</span> <span class="string">"function __doSomething"</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Create a Facade class <code>YourFacade.php</code>,</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Facades</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Support</span>\<span class="title">Facades</span>\<span class="title">Facade</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">YourFacade</span> <span class="keyword">extends</span> <span class="title">Facade</span></span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">getFacadeAccessor</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'your'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Register your object into ServiceProvider <code>YourServiceProvider.php</code>,</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Providers</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Support</span>\<span class="title">ServiceProvider</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">Services</span>\<span class="title">Api</span>\<span class="title">YourService</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">YourServiceProvider</span> <span class="keyword">extends</span> <span class="title">ServiceProvider</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Bootstrap the application services.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">boot</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Register the application services.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">register</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;app-&gt;singleton(<span class="string">'your'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> YourService();</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Register your provider and alias name in config file <code>\config\app.php</code>(with this step you can use <code>Your::doSomething()</code> directly without referencing its location <code>use App\Services\Api</code>),</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">... </span><br><span class="line"><span class="string">'providers'</span> =&gt; [</span><br><span class="line">    ...</span><br><span class="line">    App\Providers\YourServiceProvider::class</span><br><span class="line"> ],</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="string">'aliases'</span> =&gt; [</span><br><span class="line">    ...</span><br><span class="line">    <span class="string">'Your'</span>      =&gt; App\Facades\YourFacade::class</span><br><span class="line">],</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="reference-document"><a href="#reference-document" class="headerlink" title="Reference document"></a>Reference document</h3><p><a href="https://en.wikipedia.org/wiki/Facade_pattern" target="_blank" rel="noopener">wiki - Facade_pattern</a><br><a href="https://medium.com/a-young-devoloper/understanding-laravel-facades-4802025899e6" target="_blank" rel="noopener">Understanding Laravel Facades</a></p>
+
+      
+    </div>
+
+    
+      
+
+    
+
+    <footer class="article-footer">
+      <a data-url="https://leven87.github.io/2018/12/04/Facade-Pattern/" data-id="cjp9itu850003xso8aykyi8zq" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://blog-by-leven.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
     <article id="post-Decorator-Pattern" class="article article-type-post" itemscope="" itemprop="blogPost">
 
   <header class="article-header">
@@ -156,7 +264,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="https://leven87.github.io/2018/12/01/Decorator-Pattern/" data-id="cjp8bfz7k0002f4o8e3ri05f9" class="article-share-link">
+      <a data-url="https://leven87.github.io/2018/12/01/Decorator-Pattern/" data-id="cjp9itu8f0005xso8red7h3z7" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -245,7 +353,7 @@ s.setAttribute('data-timestamp', +new Date());
     
 
     <footer class="article-footer">
-      <a data-url="https://leven87.github.io/2018/11/27/Composite-Pattern/" data-id="cjp8bfz7b0001f4o8k8qpzblg" class="article-share-link">
+      <a data-url="https://leven87.github.io/2018/11/27/Composite-Pattern/" data-id="cjp9itu7a0001xso86o5metjh" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -320,7 +428,7 @@ s.setAttribute('data-timestamp', +new Date());
     
 
     <footer class="article-footer">
-      <a data-url="https://leven87.github.io/2018/11/27/test/" data-id="cjp8bfz7z0005f4o8qg27i5r9" class="article-share-link">
+      <a data-url="https://leven87.github.io/2018/11/27/test/" data-id="cjp9itu8i0006xso88psces2e" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -392,7 +500,7 @@ s.setAttribute('data-timestamp', +new Date());
     
 
     <footer class="article-footer">
-      <a data-url="https://leven87.github.io/2018/11/17/“welcome”/" data-id="cjp8bfz810006f4o8h085jrxo" class="article-share-link">
+      <a data-url="https://leven87.github.io/2018/11/17/“welcome”/" data-id="cjp9itu8m0007xso8mgznts8v" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -470,7 +578,7 @@ s.setAttribute('data-timestamp', +new Date());
     
 
     <footer class="article-footer">
-      <a data-url="https://leven87.github.io/2018/11/17/hello-world/" data-id="cjp8bfz7v0004f4o86i7e3x1d" class="article-share-link">
+      <a data-url="https://leven87.github.io/2018/11/17/hello-world/" data-id="cjp9itu9i000hxso8588o1cds" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -556,6 +664,10 @@ s.setAttribute('data-timestamp', +new Date());
     <ul class="sidebar-module-list">
       
         <li>
+          <a href="/2018/12/04/Facade-Pattern/">Facade-Pattern</a>
+        </li>
+      
+        <li>
           <a href="/2018/12/01/Decorator-Pattern/">Decorator-Pattern</a>
         </li>
       
@@ -569,10 +681,6 @@ s.setAttribute('data-timestamp', +new Date());
       
         <li>
           <a href="/2018/11/17/“welcome”/">welcome</a>
-        </li>
-      
-        <li>
-          <a href="/2018/11/17/hello-world/">Hello World</a>
         </li>
       
     </ul>
@@ -585,6 +693,10 @@ s.setAttribute('data-timestamp', +new Date());
     <ul class="sidebar-module-list" id="recent_comments_list">
       
         <li>
+          <a href="/2018/12/04/Facade-Pattern/">Facade-Pattern</a>
+        </li>
+      
+        <li>
           <a href="/2018/12/01/Decorator-Pattern/">Decorator-Pattern</a>
         </li>
       
@@ -598,10 +710,6 @@ s.setAttribute('data-timestamp', +new Date());
       
         <li>
           <a href="/2018/11/17/“welcome”/">welcome</a>
-        </li>
-      
-        <li>
-          <a href="/2018/11/17/hello-world/">Hello World</a>
         </li>
       
     </ul>
