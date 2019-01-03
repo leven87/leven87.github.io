@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Blog by Leven">
 <meta property="og:description" content="What is Facade pattern The usage of Facade pattern Scene and example Facade in Laravel Reference document   What is Facade pattern在软件工程中，隐藏系统的复杂性，并向客户端提供了可以访问系统的接口。这种类型的设计模式属于结构型模式In the software en">
 <meta property="og:locale" content="English">
-<meta property="og:updated_time" content="2018-12-04T09:07:17.161Z">
+<meta property="og:updated_time" content="2018-12-04T13:30:42.236Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Facade-Pattern">
 <meta name="twitter:description" content="What is Facade pattern The usage of Facade pattern Scene and example Facade in Laravel Reference document   What is Facade pattern在软件工程中，隐藏系统的复杂性，并向客户端提供了可以访问系统的接口。这种类型的设计模式属于结构型模式In the software en">
@@ -143,8 +143,8 @@
 <li><p>Register your object into ServiceProvider <code>YourServiceProvider.php</code>,</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Providers</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Support</span>\<span class="title">ServiceProvider</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">Services</span>\<span class="title">Api</span>\<span class="title">YourService</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">YourServiceProvider</span> <span class="keyword">extends</span> <span class="title">ServiceProvider</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Bootstrap the application services.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">boot</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Register the application services.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">register</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;app-&gt;singleton(<span class="string">'your'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> YourService();</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>Register your provider and alias name in config file <code>\config\app.php</code>(with this step you can use <code>Your::doSomething()</code> directly without referencing its location <code>use App\Services\Api</code>),</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">... </span><br><span class="line"><span class="string">'providers'</span> =&gt; [</span><br><span class="line">    ...</span><br><span class="line">    App\Providers\YourServiceProvider::class</span><br><span class="line"> ],</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="string">'aliases'</span> =&gt; [</span><br><span class="line">    ...</span><br><span class="line">    <span class="string">'Your'</span>      =&gt; App\Facades\YourFacade::class</span><br><span class="line">],</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<li><p>Register your provider and alias name in config file <code>\config\app.php</code>(with this step you can use <code>use AnyWord</code> instead of referencing its location <code>use App\Services\Api</code> and this is the advantage of facade pattern ),</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">... </span><br><span class="line"><span class="string">'providers'</span> =&gt; [</span><br><span class="line">    ...</span><br><span class="line">    App\Providers\YourServiceProvider::class</span><br><span class="line"> ],</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="string">'aliases'</span> =&gt; [</span><br><span class="line">    ...</span><br><span class="line">    <span class="string">'AnyWord'</span>      =&gt; App\Facades\YourFacade::class</span><br><span class="line">],</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <h3 id="reference-document"><a href="#reference-document" class="headerlink" title="Reference document"></a>Reference document</h3><p><a href="https://en.wikipedia.org/wiki/Facade_pattern" target="_blank" rel="noopener">wiki - Facade_pattern</a><br><a href="https://medium.com/a-young-devoloper/understanding-laravel-facades-4802025899e6" target="_blank" rel="noopener">Understanding Laravel Facades</a></p>
@@ -158,7 +158,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="https://leven87.github.io/2018/12/04/Facade-Pattern/" data-id="cjp9itu850003xso8aykyi8zq" class="article-share-link">
+      <a data-url="https://leven87.github.io/2018/12/04/Facade-Pattern/" data-id="cjqgl16x5000gxwo8x62qdbxa" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -177,6 +177,13 @@
     </a>
   </li>
   
+  
+  <li role="presentation">
+    <a href="/2019/01/03/Useful-Websites/" id="article-nav-newer" class="article-nav-link-wrap">
+      <span class="article-nav-link-title">Useful Websites</span>
+      <i class="fa fa-chevron-right pull-right"></i>
+    </a>
+  </li>
   
 </ul>
 
@@ -244,7 +251,7 @@ s.setAttribute('data-timestamp', +new Date());
   
   <div class="sidebar-module">
     <h4>Archives</h4>
-    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2018/12/">December 2018</a></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2018/11/">November 2018</a></li></ul>
+    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2019/01/">January 2019</a></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2018/12/">December 2018</a></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2018/11/">November 2018</a></li></ul>
   </div>
 
 
@@ -253,6 +260,10 @@ s.setAttribute('data-timestamp', +new Date());
   <div class="sidebar-module">
     <h4>Recents</h4>
     <ul class="sidebar-module-list">
+      
+        <li>
+          <a href="/2019/01/03/Useful-Websites/">Useful Websites</a>
+        </li>
       
         <li>
           <a href="/2018/12/04/Facade-Pattern/">Facade-Pattern</a>
@@ -268,10 +279,6 @@ s.setAttribute('data-timestamp', +new Date());
       
         <li>
           <a href="/2018/11/27/test/">test</a>
-        </li>
-      
-        <li>
-          <a href="/2018/11/17/“welcome”/">welcome</a>
         </li>
       
     </ul>
@@ -284,6 +291,10 @@ s.setAttribute('data-timestamp', +new Date());
     <ul class="sidebar-module-list" id="recent_comments_list">
       
         <li>
+          <a href="/2019/01/03/Useful-Websites/">Useful Websites</a>
+        </li>
+      
+        <li>
           <a href="/2018/12/04/Facade-Pattern/">Facade-Pattern</a>
         </li>
       
@@ -297,10 +308,6 @@ s.setAttribute('data-timestamp', +new Date());
       
         <li>
           <a href="/2018/11/27/test/">test</a>
-        </li>
-      
-        <li>
-          <a href="/2018/11/17/“welcome”/">welcome</a>
         </li>
       
     </ul>
@@ -314,7 +321,7 @@ s.setAttribute('data-timestamp', +new Date());
   <footer class="blog-footer">
   <div class="container">
     <div id="footer-info" class="inner">
-      &copy; 2018 Li<br>
+      &copy; 2019 Li<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
